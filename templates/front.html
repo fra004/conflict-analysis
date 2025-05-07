@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armed Conflict Analysis</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 10px;
+    }
+
+    /* Container for Content */
+    .container {
+      
+      width: 80%;
+      
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Intro Section */
+    .intro {
+      margin-bottom: 10px;
+    }
+
+    .intro h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #1a1f36;
+    }
+
+    .intro p {
+      font-size: 1.1em;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* Options Section */
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .option-card {
+      width: 360px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid #2a9d8f;
+    }
+
+    .option-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-card h3 {
+      color: #1a1f36;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .option-card p {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .option-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .option-card {
+        width: 100%;
+      }
+
+      .intro h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Intro Section -->
+    <section class="intro">
+      <h1>Armed Conflict Analysis</h1>
+      <p>This platform offers tools for analyzing armed conflicts worldwide, with options for network exploration, comparative studies, peace agreement insights, and correlation analysis, providing valuable insights for researchers, analysts, and policymakers.</p>
+    </section>
+
+    <!-- Options Section -->
+    <section class="options">
+      <div class="option-card">
+        <a href="http://localhost:4242/demos-js/toolkit/neo4j/index.html">
+          <table>
+            <tr>
+              <td>
+          <h3>Actor Network Exploration</h3>
+          <p>Explore relationships between conflict actors to understand influences and alliances in different scenarios.</p>
+        </td>
+        <td>
+          <img src="images/fig1.png" width="160px">
+        </td>
+      </tr>
+          </table>
+        </a>
+      </div>
+      <div class="option-card">
+        <a href="http://127.0.0.1:5000/">
+          <table>
+            <tr>
+              <td>
+          <h3>Comparative Analysis</h3>
+          <p>Analyze conflicts by region, intensity, and duration to identify patterns and differences across cases.</p>
+        </td>
+
+        <td>
+          <img src="images/fig2.png" width="160px">
+        </td>
+      </tr>
+          </table>
+        </a>
+      </div>
+    </br>
+      <div class="option-card">
+        <a href="http://127.0.0.1:5000/view_qa">
+          <table>
+            <tr>
+              <td>
+          <h3>Q&A re: Peace Agreement</h3>
+          <p>Gain insights into peace agreements, including terms, stakeholders, and their impact on ongoing conflicts.</p>
+          </td>
+
+        <td>
+          <img src="images/peace.jpg" width="160px">
+        </td>
+      </tr>
+          </table>
+        </a>
+      </div>
+      <div class="option-card">
+        <a href="http://127.0.0.1:8080/Correlation/co.html">
+          <table>
+            <tr>
+              <td>
+          <h3>Correlation Analysis</h3>
+          <p>Analyze correlations between factors such as economic conditions, alliances, and conflict severity.</p>
+        </a>
+        </td>
+
+        <td>
+          <img src="images/fig4.png" width="160px">
+        </td>
+      </tr>
+          </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    &copy; 2024 MediaFuture. All rights reserved.
+  </footer>
+
+</body>
+</html>

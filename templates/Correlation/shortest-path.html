@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actor Network Visualization</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <style>
+    svg {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Shortest Path between Actors</h2>
+<div id="graph"></div>
+
+<script type="module">
+  import neo4j from 'https://cdn.jsdelivr.net/npm/neo4j-driver@4.4.3/lib/browser/neo4j-web.js';
+
+  const uri = "neo4j+s://8ec87af7.databases.neo4j.io";
+  const user = "neo4j";
+  const password = "U25elaIO30nL4UxJuC7Qi-S0tn8GmemiS3whj2UORUQ";
+  const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
+
+  async function fetchData() {
+    const session = driver.session();
+    const query = `
+      MATCH p = shortestPath((actor1:Actor)-[:HAS_ACTOR*]-(actor2:Actor))
+      WHERE actor1.name = "Government of Bolivia" AND actor2.name = "Government of United Kingdom"
+      RETURN p
+    `;
+
+    try {
+      const result = await session.run(query);
+      const nodes = [];
+      const links = [];
+
+      result.records.forEach(record => {
+        record.get('p').segments.forEach(segment => {
+          const startNode = segment.start.properties;
+          const endNode = segment.end.properties;
+          nodes.push(startNode, endNode);
+          links.push({ source: startNode.name, target: endNode.name });
+        });
+      });
+
+      visualizeGraph({ nodes: Array.from(new Set(nodes)), links });
+    } finally {
+      await session.close();
+    }
+  }
+
+  function visualizeGraph(graphData) {
+    const svg = d3.select("#graph").append("svg");
+    const width = svg.node().getBoundingClientRect().width;
+    const height = 600;
+
+    const simulation = d3.forceSimulation(graphData.nodes)
+      .force("link", d3.forceLink(graphData.links).id(d => d.name).distance(100))
+      .force("charge", d3.forceManyBody().strength(-300))
+      .force("center", d3.forceCenter(width / 2, height / 2));
+
+    const link = svg.append("g")
+      .attr("stroke", "#999")
+      .selectAll("line")
+      .data(graphData.links)
+      .join("line")
+      .attr("stroke-width", 1.5);
+
+    const node = svg.append("g")
+      .selectAll("circle")
+      .data(graphData.nodes)
+      .join("circle")
+      .attr("r", 5)
+      .attr("fill", "#69b3a2")
+      .call(d3.drag()
+        .on("start", dragStarted)
+        .on("drag", dragged)
+        .on("end", dragEnded));
+
+    node.append("title")
+      .text(d => d.name);
+
+    simulation.on("tick", () => {
+      link
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+
+      node
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+    });
+
+    function dragStarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragEnded(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+  }
+
+  fetchData();
+</script>
+
+</body>
+</html>

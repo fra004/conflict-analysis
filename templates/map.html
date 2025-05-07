@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Map with Population Data</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+    #map-container {
+      max-width: 1000px;
+      margin-top: 20px;
+      position: relative;
+    }
+    .country {
+      fill: #d3d3d3;
+      cursor: pointer;
+      transition: fill 0.3s ease;
+    }
+    .country:hover {
+      fill: #87cefa;
+    }
+    #popup {
+      display: none;
+      position: absolute;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #333;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+<h2>Click on a Country to See Population Data</h2>
+
+<div id="map-container">
+  <embed id="world-map" src="world-map.svg" type="image/svg+xml" style="width: 50%;">
+  <div id="popup"></div>
+</div>
+
+<script>
+  // Load population data from JSON
+  fetch('populationData.json')
+    .then(response => response.json())
+    .then(data => {
+      const countryPopulation = data;
+
+      // Wait for SVG to load
+      document.getElementById('world-map').addEventListener('load', () => {
+        const svgDoc = document.getElementById('world-map').contentDocument;
+
+        // Get all countries in the SVG map
+        const countries = svgDoc.querySelectorAll('path');
+
+        countries.forEach(country => {
+          const countryId = country.id;
+
+          if (countryId && countryPopulation[countryId]) {
+            country.classList.add('country'); // Style class
+
+            country.addEventListener('click', (event) => {
+              const countryName = country.getAttribute('title') || countryId;
+              const population = countryPopulation[countryId];
+
+              const popup = document.getElementById('popup');
+              popup.style.display = 'block';
+              popup.style.left = `${event.pageX + 10}px`;
+              popup.style.top = `${event.pageY + 10}px`;
+              popup.innerHTML = `<strong>${countryName}</strong><br>Population: ${population.toLocaleString()}`;
+            });
+          }
+        });
+      });
+    });
+
+  // Hide popup when clicking outside
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.country')) {
+      document.getElementById('popup').style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

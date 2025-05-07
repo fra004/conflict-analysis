@@ -1,0 +1,77 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Visualization of Conflict analysis</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/inspector.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript">
+        // JavaScript function to submit the form when dropdown changes
+        function submitFormOnChange() {
+            document.getElementById("myForm").submit();
+        }
+    </script>
+
+</head>
+<body>
+
+<script type="module">
+
+import define from "{{ url_for('static', filename='js/index.js') }}";
+import {Runtime, Library, Inspector} from "{{ url_for('static', filename='js/runtime.js') }}";
+
+
+
+const runtime = new Runtime();
+const main = runtime.module(define, Inspector.into(document.body));
+
+</script>
+
+
+    <h1>Select a location for conflict analysis</h1>
+    <form id="myForm" method="POST">
+        <label for="location">Location:</label>
+        <select id="location" name="location" onchange="submitFormOnChange()">
+            {% for option in locations %}
+                <option value="{{ option }}" {% if selected_location == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+        
+    
+
+    {% if selected_location %}
+        <h2>Conflict parties for {{ selected_location }}:</h2>
+        
+            <label for="selected_party_1">Conflicting party 1:</label>
+            <select id="selected_party_1" name="selected_party_1">
+                {% for option in conflicting_parties_1 %}
+                    <option value="{{ option }}" {% if selected_party_1 == option %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="selected_party_2">Conflicting party 2:</label>
+            <select id="selected_party_2" name="selected_party_2">
+                {% for option in conflicting_parties_2 %}
+                    <option value="{{ option }}" {% if selected_party_2 == option %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Analyze</button>
+
+    {% endif %}
+
+        
+    </form>
+
+</br>
+
+
+
+
+</body>
+</html>

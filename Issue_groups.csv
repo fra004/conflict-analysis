@@ -1,0 +1,172 @@
+1000;Territory 
+1100;Separatism
+1101;Independence 
+1102;Irredentism 
+1200;Unification 
+1201;Unification of states 
+1300;Self-rule 
+1301;Autonomy 
+1302;Federalism 
+1303;Confederation/union 
+1400;Adjustments to administrative arrangements  
+1401;Decentralization  
+1402;Change of administrative divisions  
+2000;State structures  
+2100;Change political system  
+2101;CPS: Democracy  
+2102;CPS: Socialist state 
+2103;CPS: Islamic state
+2104;CPS: Other/undefined system 
+2200;Executive
+2201;Oust full executive
+2202;Oust head of the executive 
+2203;Reform executive structure 
+2204;Executive power-sharing 
+2205;Executive power-sharing: interim
+2206;Oust local executive
+2300;Parliament  
+2301;Oust parliament  
+2302;Reform parliament  
+2303;Parliamentary power-sharing 
+2400;Judiciary  
+2401;Change judicial system  
+2402;Reform judicial system 
+2403;Constitutional issues 
+2500;Security sector  
+2501;Restructure military forces  
+2502;Restructure police forces  
+2503;Disband para-military forces  
+2504;Security sector power-sharing  
+2600;Bureaucratic structure  
+2601;Bureaucratic setup 
+3000;Governance 
+3100;Quality of governance 
+3101;Rule of law 
+3102;Law and order  
+3103;Corruption  
+3104;Foreign policy reform 
+3200;Elections 
+3201;Hold elections 
+3202;Opposition to elections 
+3203;Electoral reform 
+3204;Electoral fraud 
+4000;Political rights  
+4100;Civil rights and freedoms  
+4101;Civil rights  
+4102;Restrictions on civil rights  
+4103;Citizenship reforms  
+4104;Human rights  
+4105;Freedom of expression  
+4106;Freedom of association  
+4107;Freedom of movement  
+4108;Recognition as a political party  
+4109;Restrictions on freedom of expression  
+4200;Religious rights and freedoms  
+4201;Religious rights  
+4202;Restrictions on religious rights  
+4205;Education system: increase religion  
+4206;Blasphemy  
+4300;Cultural rights and freedoms  
+4301;Cultural rights  
+4302;Restrictions on cultural rights  
+4303;Language rights  
+4304;Education system: culture  
+4305;Protection of cultural heritage  
+4306;Destruction of cultural heritage  
+4400;Gender rights and freedoms  
+4401;Gender rights  
+4402;Restriction of gender rights  
+4403;Withdrawal of gender rights  
+4500;Labor rights and freedoms 
+4501;Labor rights  
+4600;Children’s rights and freedoms  
+4601;Childrens rights  
+4700;Referendum 
+4701;Referendum 
+5000;Distribution of resources 
+5100;State distribution systems 
+5101;Change economic system 
+5102;Economic reforms 
+5103;Public services 
+5104;Basic needs 
+5200;Natural resources 
+5201;Land reforms 
+5202;Water resources 
+5203;Revenues from natural resources 
+5204;Protection of natural resources/the environment 
+5205;Climate change 
+6000;Foreign involvement 
+6100;Increase foreign involvement 
+6101;IFI: Military intervention/foreign forces 
+6102;IFI: Military support 
+6103;IFI: Political support  
+6104;IFI: Financial support 
+6105;IFI: International monitoring 
+6106;IFI: Support from diasporas/foreign fighters 
+6107;IFI: Sanctions 
+6108;IFI: Humanitarian aid 
+6109;IFI: International court/tribunal/investigation 
+6110;IFI: Foreign mediator  
+6111;IFI: Recognition 
+6112;IFI: Use of foreign influence  
+6200;Decrease foreign involvement  
+6201;DFI: Withdrawal of military intervention/foreign forces 
+6202;DFI: Withdrawal of military support  
+6203;DFI: Withdrawal of political support 
+6204;DFI: Withdrawal of financial support 
+6205;DFI: Withdrawal of international monitoring  
+6206;DFI: Withdrawal of sanctions  
+6207;DFI: Removal of foreign mediator 
+6208;DFI: Removal of foreigners  
+6209;DFI: Removal of foreign influence 
+6210;DFI: Withdrawal of humanitarian aid 
+7000;Violent targeting  
+7100;Atrocities and abuses  
+7101;Atrocities and abuses  
+7200;Collective targeting 
+7201;Collective targeting: ethnic 
+7202;Collective targeting: political  
+7203;Collective targeting: religious  
+7204;Collective targeting: other group  
+7300;Call for collective targeting  
+7301;Call for collective targeting: ethnic  
+7302;Call for collective targeting: political 
+7303;Call for collective targeting: religious  
+7304;Call for collective targeting: other group  
+7400;Military conduct 
+7401;Military conduct  
+7500;Revenge/vengeance  
+7501;Revenge/vengeance  
+8000;Refugees, IDPs and prisoners 
+8100;Return of refugees/IDPs 
+8101;Return of refugees/IDPs 
+8102;Non-refoulement of refugees/IDPs 
+8200;Release of prisoners 
+8201;Release of prisoners 
+9000;Negotiations, Ceasefires and Peace agreements  
+9100;Negotiations  
+9101;Call for negotiations 
+9102;Opposition to negotiations 
+9103;Structure of negotiations 
+9104;National dialogue  
+9200;Ceasefires 
+9201;Call for ceasefire 
+9202;Call for implementation/abiding to ceasefire  
+9300;Peace agreement 
+9301;Peace agreement implementation  
+9302;Opposition to peace agreement  
+9304;DDR issues  
+10000;Transitional justice and Liability  
+10100;Truth and reconciliation processes  
+10101;Call for truth and reconciliation processes  
+10200;Liability  
+10201;Accountability/prosecution/investigation  
+10202;Amnesties 
+10203;Recognition of wrongdoing  
+10204;Compensation/restoration  
+11000;Actor characteristics operationalizations  
+11100;Ethnicity (ethnicity_1 through ethnicity_4)  
+11200;Geography (geography_1 through geography_4) 
+11300;Ideology (ideology_1 through ideology_4) 
+11400;Religion (religion_1 through religion_3) 
+9999;No issues recorded 

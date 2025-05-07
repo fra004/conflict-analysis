@@ -1,0 +1,14 @@
+{
+  "name": "87ae1168e2040353",
+  "main": "87ae1168e2040353@517.js",
+  "version": "517.0.0",
+  "homepage": "https://observablehq.com/d/87ae1168e2040353",
+  "author": {
+    "name": "Conf",
+    "url": "https://observablehq.com/@conf"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}

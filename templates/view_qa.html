@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Conflict Dynamics Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+        }
+
+        #container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Left Pane Styles */
+        #left-pane {
+            width: 30%;
+            background-color: #deded1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        #left-pane h2 {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333333;
+        }
+
+        #left-pane p {
+            font-size: 14px;
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        #left-pane svg {
+            width: 50px;
+            height: 50px;
+            margin-top: 20px;
+            fill: #007bff;
+        }
+
+        /* Chat Interface Styles */
+        #chat-container {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-history {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+        }
+
+        .message svg {
+            margin-right: 8px;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: #333333;
+        }
+
+        #input-container {
+            display: flex;
+            padding: 12px;
+            background-color: #f9f9f9;
+        }
+
+        #queryInput {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: none;
+        }
+
+        #submitBtn {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        #submitBtn svg {
+            margin-left: 8px;
+        }
+
+        #submitBtn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Scrollbar styling for chat history */
+        #chat-history::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chat-history::-webkit-scrollbar-thumb {
+            background-color: #d1d1d1;
+            border-radius: 8px;
+        }
+        #spinner {
+  display: none; /* Initially hidden */
+  margin-left: 8px;
+  animation: rotation 1s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <!-- Left Pane -->
+    <div id="left-pane">
+        <h2>Q&A re: Peace Agreement</h2>
+        <p>This chat interface allows you to ask questions about peace agreements. Powered by a RAG (Retrieval-Augmented Generation) system, it utilizes a comprehensive dataset on global peace agreements to provide detailed responses.</p>
+        <p>Simply type your question in the chat box, and the system will retrieve and generate an answer based on the latest data.</p>
+        
+        <!-- Peace Icon -->
+        <img src="http://127.0.0.1:8080/images/peace.webp" width="150" alt="Peace Dove">
+
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chat-container">
+        <div id="chat-history">
+            <!-- Sample conversation history for demonstration -->
+            <div class="message user-message">
+                <!-- User icon -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 12a7.98 7.98 0 0 1-6.32-3.13 5.12 5.12 0 0 1 12.64 0A7.98 7.98 0 0 1 12 18z" fill="#ffffff"/>
+                </svg>
+                What is the status of the peace agreement in Region X?
+            </div>
+            <div class="message bot-message">
+                <!-- Bot icon -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 5h2v4h-2zm1 8.75a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 12 15.75z" fill="#007bff"/>
+                </svg>
+                The peace agreement in Region X is currently being implemented, with monitoring from international organizations.
+            </div>
+        </div>
+
+        <div id="input-container">
+            <textarea id="queryInput" rows="1" placeholder="Type your question here..."></textarea>
+            <button id="submitBtn" onclick="submitQuery()">
+              Send
+              <svg id="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 5h2v4h-2zm1 8.75a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 12 15.75z" fill="#007bff" />
+</svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Submit query function using AJAX
+    function submitQuery() {
+        const queryInput = document.getElementById('queryInput');
+        const chatHistory = document.getElementById('chat-history');
+
+
+        // Check if input is empty
+        if (queryInput.value.trim() === "") return;
+
+
+        // Show spinner
+        document.getElementById('spinner').style.display = 'inline-block';
+
+        // Append user's message
+        const userMessage = document.createElement('div');
+        userMessage.className = 'message user-message';
+        userMessage.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 12a7.98 7.98 0 0 1-6.32-3.13 5.12 5.12 0 0 1 12.64 0A7.98 7.98 0 0 1 12 18z" fill="#ffffff"/></svg>` + queryInput.value;
+        chatHistory.appendChild(userMessage);
+
+        // Store the user input and clear the input field
+        const userQuery = queryInput.value;
+        queryInput.value = '';
+
+        // Send query to the Flask app via AJAX
+        fetch('/get_response', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ queryInput: userQuery })
+        })
+        .then(response => response.json())
+        .then(data => {
+              // Hide spinner
+              document.getElementById('spinner').style.display = 'none';
+            // Display bot's response
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            botMessage.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 5h2v4h-2zm1 8.75a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 12 15.75z" fill="#007bff"/></svg>` + data.answer;
+            chatHistory.appendChild(botMessage);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>
